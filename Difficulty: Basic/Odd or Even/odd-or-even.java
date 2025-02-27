@@ -23,12 +23,18 @@ class GFG {
 
 // User function Template for Java
 class Solution {
+    
+    static boolean isSet(int n , int bit){
+        int res = n & (1<<bit);
+        return (res==0)?false:true;
+    }
     static boolean isEven(int n) {
         // code here
-        if(n%2!=0){
-            return false;
-        }
-        return true;
+
+        if(isSet(n,0)){
+    return false ;
+}
+return true;
     }
     
 }
