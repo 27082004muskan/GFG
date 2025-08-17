@@ -1,0 +1,53 @@
+/* node of linked list:
+
+class Node{
+    int data;
+    Node next;
+    Node(int d){
+        data=d;
+        next=null;
+    }
+} */
+
+class Solution {
+    
+    
+    public Node rotate(Node head, int k) {
+  if(head==null || head.next==null || k==0) return head;
+    
+    //STEP-1 Count no of nodes with the help of which i can find my new head ..len-k = newHead
+    int count=0;
+    Node temp = head;
+    while(temp!=null){
+    count++;
+    temp=temp.next;
+}
+
+ k = k%count;
+ if(k==0) return head;
+ 
+ int stepToNewHead = k;
+
+//STEP-2 move to new head
+
+Node curr = head;
+Node prev = null;
+
+while(stepToNewHead >0){
+    prev=curr;
+    curr=curr.next;
+    stepToNewHead --;
+    
+}
+prev.next=null;
+Node tail = curr;
+while(tail.next!=null){
+tail=tail.next;
+}
+tail.next=head;
+
+return curr;
+    
+    
+    }
+}
