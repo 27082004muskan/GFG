@@ -1,0 +1,37 @@
+/*
+class Node {
+    int data;
+    Node next;
+    Node(int value) {
+        this.value = value;
+    }
+}
+*/
+
+class Solution {
+    Node reverseList(Node head) { 
+        
+        //METHOD-1 (TLE)
+        
+      
+        // if(head.next==null) return head;
+        // Node newHead = reverseList(head.next);
+        // head.next.next=head;
+        // return newHead;
+        
+        
+        //METHOD-2 (3 Pointers)
+        Node curr = head;
+        Node prev = null;
+        Node agla = null;
+        
+        while(curr!=null){
+            agla = curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=agla;
+            
+        }
+        return prev;
+    }
+}
