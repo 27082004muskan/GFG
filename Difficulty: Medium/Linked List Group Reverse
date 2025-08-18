@@ -1,0 +1,50 @@
+/*node class of the linked list
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        data = key;
+        next = null;
+    }
+}
+
+*/
+
+class Solution {
+    
+    public static Node reverseKGroup(Node head, int k) { 
+        
+        // 3->5->4->7->7->9->8->3->2->8->6    k=3 
+        
+        if(head==null || k<=1) return head;
+        
+      Node temp = head;
+      int cnt =0;
+      while(cnt<k && temp!=null){
+          temp=temp.next;
+          cnt++;
+      }
+      
+      //recursively call for rest of the ll 
+      Node prevNode = reverseKGroup(temp , k);       
+       
+      //reverse current group 
+      temp = head ; 
+    
+      while(cnt>0){
+          Node next = temp.next;  //preserving 2nd node   
+          temp.next=prevNode;      // starting first node ko rest list ke first se link 1->4
+           
+          prevNode = temp;         //temp aur prev same point kra do ( 1 = head , prevNode)
+          temp= next;             //temp ko next ..     (2->temp)
+          // (2->1)
+          
+          cnt--;
+      }
+     
+      return prevNode;
+      
+    }
+}
