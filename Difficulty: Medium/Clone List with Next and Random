@@ -1,0 +1,46 @@
+/*
+class Node {
+    int data;
+    Node next;
+    Node random;
+
+    Node(int x) {
+        data = x;
+        next = null;
+        random = null;
+    }
+}
+*/
+class Solution {
+    public Node cloneLinkedList(Node head) {
+        // code here
+        if(head==null) return null;
+        
+        HashMap<Node , Node > m = new HashMap<>();
+        
+        Node newHead = new Node(head.data);
+        m.put(head,newHead);
+        Node oldtemp = head.next;
+        Node newTemp=newHead;
+        
+        while(oldtemp!=null){
+            Node copyNode = new Node(oldtemp.data);
+            m.put(oldtemp , copyNode);
+            newTemp.next = copyNode;
+            oldtemp=oldtemp.next;
+            newTemp=newTemp.next;
+        }
+        
+        oldtemp=head;
+        newTemp=newHead;
+        
+        while(oldtemp!=null){
+            if(oldtemp.random!=null){
+                newTemp.random = m.get(oldtemp.random);
+            }
+            oldtemp = oldtemp.next;
+            newTemp=newTemp.next;
+        }
+        return newHead;
+    }
+}
