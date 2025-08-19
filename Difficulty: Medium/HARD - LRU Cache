@@ -1,0 +1,33 @@
+class LRUCache {
+
+private static LinkedHashMap<Integer,Integer> cache;
+private static int capacity ;
+
+    LRUCache(int cap) {
+        // code here
+     capacity=cap;
+        cache = new LinkedHashMap<>(cap ,0.75f,true);
+        
+        
+    }
+
+    public static int get(int key) {
+ return cache.getOrDefault(key,-1);
+        
+        //  code here
+    }
+
+        
+    public static void put(int key, int value) {
+        //  code here
+        if(cache.containsKey(key)){
+            cache.put(key,value);
+            return ;
+        }
+        if(cache.size()==capacity){
+            int oldestKey=cache.keySet().iterator().next();
+            cache.remove(oldestKey);
+        }
+        cache.put(key,value);
+    }
+}
