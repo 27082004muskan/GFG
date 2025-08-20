@@ -1,0 +1,42 @@
+class Solution {
+    public ArrayList<String> findPermutation(String s) {
+        // Code here
+        ArrayList<String> ans = new ArrayList<>();
+        char[] chars =s.toCharArray();
+        solve(chars , ans , 0);
+        Collections.sort(ans);
+        return ans;
+        
+        
+    }
+    private void solve(char[] chars , ArrayList<String> ans , int index){
+        if(index==chars.length){
+            ans.add(new String(chars));
+            return;
+        }
+        for(int j=index; j<chars.length;j++){
+            //avoid duplicates
+            if(!shouldSwap(chars , index,j))continue;
+            //swap
+            swap(chars , index , j);
+            //recursion
+            solve(chars,ans , index+1);
+            //backtrack
+            swap(chars , index , j);
+        }
+    }
+    
+    private boolean shouldSwap(char[] a , int start , int curr){
+        for(int i =start;i<curr;i++){
+            if(a[i]==a[curr]) return false;
+            
+        }
+        return true;
+    }
+    
+    public void swap(char[] chars , int i , int j ){
+        char temp = chars[i];
+        chars[i]=chars[j];
+        chars[j]=temp;
+    }
+}
