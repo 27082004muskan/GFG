@@ -1,0 +1,58 @@
+
+// User function Template for Java
+
+class Solution {
+    void find(int row , int n , ArrayList<ArrayList<Integer>> ans, char[][] Board,boolean[] column , boolean[] leftDiag, boolean[] rightDiag){
+        if(row==n){
+            ArrayList<Integer> temp = new ArrayList<>();
+            for(int i =0;i<n;i++){
+                for(int j =0;j<n;j++){
+                    if(Board[i][j]=='Q')
+                     temp.add(j+1);  
+                }
+             
+            }
+            ans.add(temp);
+            return;
+        }
+        
+        for(int j =0;j<n;j++){
+            if(!column[j] && !leftDiag[n-1+j-row] && !rightDiag[row+j]){
+                column[j]=true;
+                leftDiag[n-1+j-row]=true;
+                rightDiag[row+j]=true;
+                Board[row][j]='Q';
+                
+                find(row+1,n, ans, Board,column , leftDiag , rightDiag);
+                
+                column[j]=false;
+                leftDiag[n-1+j-row]=false;
+                rightDiag[row+j]=false;
+                Board[row][j]='.';
+                
+            }
+        }
+    }
+    
+    
+    
+    
+    public ArrayList<ArrayList<Integer>> nQueen(int n) {
+        // code here
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        char[][] Board= new char[n][n];
+        
+        for(int i =0;i<n;i++){
+            Arrays.fill(Board[i],'.');
+        }
+        
+        boolean[] column = new boolean[n];
+        boolean[] leftDiag = new boolean[2*n-1];
+        boolean[] rightDiag = new boolean[2*n-1];
+        
+        
+        find(0,n,ans , Board, column , leftDiag, rightDiag);
+        return ans;
+    }
+    
+}
