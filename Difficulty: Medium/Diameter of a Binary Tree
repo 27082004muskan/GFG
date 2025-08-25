@@ -1,0 +1,68 @@
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+*/
+
+
+// ------------------------------------o(n2)----------------------
+
+// class Solution {
+    
+//     public int height (Node root){
+//         if(root==null || (root.left==null && root.right==null))
+//         return 0;
+        
+//         return 1+Math.max(height(root.left),height(root.right));
+//     }
+    
+    
+//     int diameter(Node root) {
+//         // Your code here
+//       if(root==null || (root.left==null && root.right==null))
+//         return 0;
+//         int leftAns =diameter(root.left);
+//         int rightAns =diameter(root.right);
+//         int mid = height(root.left)+height(root.right);
+//         if(root.right!=null) mid++;
+//         if(root.left!=null) mid++;
+        
+//         int max = Math.max(leftAns , Math.max(rightAns, mid));
+//         return max;
+         
+//     }
+// }
+
+
+//------------------------o(n) approach -----------
+
+
+
+
+class Solution {
+    int maxDia=0;
+    
+    
+    public int height (Node root){
+        if(root==null ) return 0 ;
+        int left = height(root.left) ;
+        int right = height(root.right);
+        
+        
+        maxDia = Math.max(maxDia , left+right+1);
+        
+        return 1+Math.max(left,right);
+    }
+
+ int diameter(Node root) {
+     height(root);
+     return maxDia-1;
+ }
+}
